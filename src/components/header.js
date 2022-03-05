@@ -74,8 +74,15 @@ ScrollTop.propTypes = {
   window: PropTypes.func
 };
 
-export default function BackToTop(props) {
+export default function BackToTop({props, dataToScreen, dataToHome}) {
+    const [search, setSearch ] = React.useState("");
     const classes = useStyles();
+
+     const onChange = (e)  => { 
+       setSearch(e.target.value)
+       dataToHome(e.target.value)
+
+     }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -91,14 +98,16 @@ export default function BackToTop(props) {
           <Typography variant="h4">StarWars</Typography>
         </Toolbar>
         <TextField 
+        value={search}
          className={classes.search}
+         onChange={onChange}
         variant="standard"
         placeholder="Search by name"/>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
       <Container >
         <Box my={2} className={classes.containerGrid}>
-            {props.dataToScreen}
+            {dataToScreen}
         </Box>
       </Container>
       <ScrollTop {...props}>
