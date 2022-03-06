@@ -33,8 +33,14 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridTemplateColumns: "1fr 1fr 1fr 1fr",
     width: "100%",
-  },
+  },containerDetail:{ 
+    display:'flex',
+    width: "100%",
+  }
+
 }));
+
+
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -47,6 +53,8 @@ function ScrollTop(props) {
     disableHysteresis: true,
     threshold: 100,
   });
+
+ 
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
@@ -76,10 +84,14 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function BackToTop({ props, dataToScreen, dataToHome }) {
+export default function BackToTop({ props, dataToScreen,isDetail  ,  dataToHome }) {
   const [search, setSearch] = React.useState("");
   const classes = useStyles();
   const navigate = useNavigate();
+
+  // changing classes to reuse the component 
+  // details and home pages. 
+  const screen = isDetail  ? "containerDetail" : "containerGrid" ;
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -102,23 +114,23 @@ export default function BackToTop({ props, dataToScreen, dataToHome }) {
         <Toolbar>
           <IconButton 
           color="inherit"
-          onClick={()=> goToHome(navigate) ,()=> console.log('clicked ') }>
+          onClick={()=> goToHome(navigate) }>
           <Typography 
           
           variant='h4'>StarWars</Typography>
           </IconButton>
         </Toolbar>
-        <TextField
+      { isDetail ?  ""   :  <TextField
           value={search}
           className={classes.search}
           onChange={onChange}
           variant='standard'
           placeholder='Search by name'
-        />
+        />}
       </AppBar>
       <Toolbar id='back-to-top-anchor' />
       <Container>
-        <Box my={2} className={classes.containerGrid}>
+        <Box my={2} className={classes[screen]}>
           {dataToScreen}
         </Box>
       </Container>

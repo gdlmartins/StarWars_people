@@ -40,8 +40,8 @@ export default function RecipeReviewCard({ character , isDetail  }) {
        {  isDetail ? <img
           src={character.image}
           style={{
-            width: "480px",
-            height: "590px",
+            width: "400px",
+            height: "450px",
             objectFit: "cover",
             objectPosition: "100% 10%",
           }}
