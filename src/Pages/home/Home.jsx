@@ -7,10 +7,15 @@ import useGetData from "../../hooks/useGetData";
 import { StyledGrid, StyledCard } from "./style";
 
 const Home = () => {
+  const [searchData,setSearchData ] = React.useState('');
   const data = useGetData("all");
 
-  console.log(data);
 
+  const dataToHome = (dataFromHeader) => { 
+    setSearchData(dataFromHeader)
+  }
+
+  console.log(data);
   const dataToScreen =
     data &&
     data.length &&
@@ -34,6 +39,9 @@ const Home = () => {
           return false;
         } else return true;
       })
+      .filter(item => { 
+        return (item.name).toLowerCase().includes(searchData.toLowerCase())
+      })
 
       .map((character) => {
         return (
@@ -45,6 +53,7 @@ const Home = () => {
 
   return<> 
    <BackToTop
+   dataToHome={dataToHome}
   dataToScreen={dataToScreen}
    />
    

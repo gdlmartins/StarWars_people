@@ -20,18 +20,17 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
     backgroundColor: "rgb(5, 5, 5)",
-  },search: { 
-      display: "flex",
-      background: "white",
-      paddingLeft:" 1%",
-  },containerGrid: { 
-     
-    display:"grid",
-gridTemplateColumns:  "1fr 1fr 1fr 1fr",
-width: "100%", 
-
-     
-  }
+  },
+  search: {
+    display: "flex",
+    background: "white",
+    paddingLeft: " 1%",
+  },
+  containerGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+    width: "100%",
+  },
 }));
 
 function ScrollTop(props) {
@@ -43,7 +42,7 @@ function ScrollTop(props) {
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     disableHysteresis: true,
-    threshold: 100
+    threshold: 100,
   });
 
   const handleClick = (event) => {
@@ -58,7 +57,7 @@ function ScrollTop(props) {
 
   return (
     <Zoom in={trigger}>
-      <div onClick={handleClick} role="presentation" className={classes.root}>
+      <div onClick={handleClick} role='presentation' className={classes.root}>
         {children}
       </div>
     </Zoom>
@@ -71,38 +70,50 @@ ScrollTop.propTypes = {
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
-  window: PropTypes.func
+  window: PropTypes.func,
 };
 
-export default function BackToTop(props) {
-    const classes = useStyles();
+export default function BackToTop({ props, dataToScreen, dataToHome }) {
+  const [search, setSearch] = React.useState("");
+  const classes = useStyles();
+
+  const onChange = (e) => {
+    setSearch(e.target.value);
+    dataToHome(e.target.value);
+  };
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar style={{ display: "flex" ,
-       flexDirection: "row", 
-       justifyContent: "space-between", 
-       alignItems: "center", 
-       padding: "0 10px", 
-       color:"goldenrod",
-       backgroundColor: "rgba(30,30, 20, 0.378)",
-       }}>
+      <AppBar
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "0 10px",
+          color: "goldenrod",
+          backgroundColor: "rgba(30,30, 20, 0.378)",
+        }}
+      >
         <Toolbar>
-          <Typography variant="h4">StarWars</Typography>
+          <Typography variant='h4'>StarWars</Typography>
         </Toolbar>
-        <TextField 
-         className={classes.search}
-        variant="standard"
-        placeholder="Search by name"/>
+        <TextField
+          value={search}
+          className={classes.search}
+          onChange={onChange}
+          variant='standard'
+          placeholder='Search by name'
+        />
       </AppBar>
-      <Toolbar id="back-to-top-anchor" />
-      <Container >
+      <Toolbar id='back-to-top-anchor' />
+      <Container>
         <Box my={2} className={classes.containerGrid}>
-            {props.dataToScreen}
+          {dataToScreen}
         </Box>
       </Container>
       <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+        <Fab color='secondary' size='small' aria-label='scroll back to top'>
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
