@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
+import { IconButton, TextField } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
@@ -12,7 +13,9 @@ import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
 import Home from "../Pages/home/Home";
-import { TextField } from "@material-ui/core";
+import { useNavigate } from "react-router";
+import { goToHome } from "../Router/coordenation";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,6 +79,7 @@ ScrollTop.propTypes = {
 export default function BackToTop({ props, dataToScreen, dataToHome }) {
   const [search, setSearch] = React.useState("");
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -96,7 +100,13 @@ export default function BackToTop({ props, dataToScreen, dataToHome }) {
         }}
       >
         <Toolbar>
-          <Typography variant='h4'>StarWars</Typography>
+          <IconButton 
+          color="inherit"
+          onClick={()=> goToHome(navigate) ,()=> console.log('clicked ') }>
+          <Typography 
+          
+          variant='h4'>StarWars</Typography>
+          </IconButton>
         </Toolbar>
         <TextField
           value={search}

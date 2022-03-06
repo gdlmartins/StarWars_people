@@ -1,10 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import { Button } from "@material-ui/core";
-import GetData from "../service/GetData";
+import { goToDetail } from "../Router/coordenation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,24 +23,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard({ character  }) {
+export default function RecipeReviewCard({ character , isDetail  }) {
+  const navigate = useNavigate();
   const classes = useStyles();
-  const [detailCharacter, setDetailCharacter] = React.useState({});
 
-  const saveGetData = ( data)=> { 
-    setDetailCharacter(data)
-    console.log(data)
-  }
 
   const onClick =(id)=> { 
-    GetData(`id/${id}`,saveGetData )
-    
+
+    goToDetail(navigate , id)
   }
   
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.carddiv}>
+       {  isDetail ? <img
+          src={character.image}
+          style={{
+            width: "480px",
+            height: "590px",
+            objectFit: "cover",
+            objectPosition: "100% 10%",
+          }}
+        /> :
         <img
           src={character.image}
           style={{
@@ -48,12 +54,15 @@ export default function RecipeReviewCard({ character  }) {
             objectFit: "cover",
             objectPosition: "100% 10%",
           }}
-        />
+        /> }
       </CardContent>
       <CardActions disableSpacing>
+       {isDetail ?   ""  : 
         <Button 
         onClick={()=>onClick(character.id)}
         color='inherit'>{character.name}</Button>
+        }
+
       </CardActions>
     </Card>
   );
