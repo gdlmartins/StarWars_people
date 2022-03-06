@@ -1,4 +1,4 @@
-### StarWars Charcters 
+### StarWars Characters 
 
 
 ## Using a random APi that I found on github with StarWars data.  Using **react js, MUI, CSS and HTML**
