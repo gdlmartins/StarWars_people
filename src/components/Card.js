@@ -23,46 +23,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard({ character , isDetail  }) {
+export default function RecipeReviewCard({ character, isDetail }) {
   const navigate = useNavigate();
   const classes = useStyles();
 
-
-  const onClick =(id)=> { 
-
-    goToDetail(navigate , id)
-  }
-  
+  const onClick = (id) => {
+    goToDetail(navigate, id);
+  };
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.carddiv}>
-       {  isDetail ? <img
-          src={character.image}
-          style={{
-            width: "400px",
-            height: "450px",
-            objectFit: "cover",
-            objectPosition: "100% 10%",
-          }}
-        /> :
-        <img
-          src={character.image}
-          style={{
-            width: "280px",
-            height: "290px",
-            objectFit: "cover",
-            objectPosition: "100% 10%",
-          }}
-        /> }
+        {isDetail ? (
+          <img
+            src={character.image}
+            style={{
+              width: "400px",
+              height: "450px",
+              objectFit: "cover",
+              objectPosition: "100% 10%",
+            }}
+          />
+        ) : (
+          <img
+            src={character.image}
+            style={{
+              width: "280px",
+              height: "290px",
+              objectFit: "cover",
+              objectPosition: "100% 10%",
+            }}
+          />
+        )}
       </CardContent>
       <CardActions disableSpacing>
-       {isDetail ?   ""  : 
-        <Button 
-        onClick={()=>onClick(character.id)}
-        color='inherit'>{character.name}</Button>
-        }
-
+        {isDetail ? (
+          ""
+        ) : (
+          <Button onClick={() => onClick(character.id)} color='inherit'>
+            {character.name}
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
