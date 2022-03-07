@@ -4,15 +4,15 @@ import styled from 'styled-components';
 
 export const StyledGrid = styled.div`
 display:grid;
-margin: 1rem auto;
+margin: 10px auto;
 grid-template-columns:  1fr 1fr 1fr 1fr;
-width: 92%; 
 
-@media(max-width:1000px){
+
+@media(max-width:1200px){
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 5px auto;
-    width: 100%; 
+    max-width: 90%; 
 }
 
 @media(max-width:910px){
