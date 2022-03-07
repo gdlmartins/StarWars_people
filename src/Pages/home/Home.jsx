@@ -49,15 +49,17 @@ const Home = () => {
         );
       });
 
+
+   const dataToScreenAfterResponsible = <StyledGrid> 
+   {dataToScreen}
+    </StyledGrid>
+
   return<> 
    <BackToTop
+   dataToScreen={dataToScreenAfterResponsible}
    dataToHome={dataToHome}
    />
-   <StyledGrid> 
 
-  {dataToScreen}
-   </StyledGrid>
-   
   </>;
 };
 
