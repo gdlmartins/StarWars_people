@@ -15,13 +15,12 @@ const Home = () => {
     setSearchData(dataFromHeader)
   }
 
-  console.log(data);
   const dataToScreen =
     data &&
     data.length &&
     data.filter((item) => {
         if (
-          // removed the item without a real pic
+          // removed the itens without a real pic
           item.name === "Lobot" ||
           item.name === "Mon Mothma" ||
           item.name === "Roos Tarpals" ||
@@ -42,7 +41,6 @@ const Home = () => {
       .filter(item => { 
         return (item.name).toLowerCase().includes(searchData.toLowerCase())
       })
-
       .map((character) => {
         return (
           <StyledCard key={character.id}>
@@ -54,8 +52,11 @@ const Home = () => {
   return<> 
    <BackToTop
    dataToHome={dataToHome}
-  dataToScreen={dataToScreen}
    />
+   <StyledGrid> 
+
+  {dataToScreen}
+   </StyledGrid>
    
   </>;
 };

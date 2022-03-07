@@ -7,14 +7,17 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+import { useMediaQuery } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
+
 import Home from "../Pages/home/Home";
 import { useNavigate } from "react-router";
 import { goToHome } from "../Router/coordenation";
+import { CenterFocusStrong } from "@material-ui/icons";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,12 +32,13 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     paddingLeft: " 1%",
   },
-  containerGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr 1fr",
-    width: "100%",
-  },containerDetail:{ 
+
+
+  containerDetail:{ 
     display:'flex',
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection: "column",
     width: "100%",
   }
 
@@ -43,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ScrollTop(props) {
+
   const { children, window } = props;
   const classes = useStyles();
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -89,10 +94,6 @@ export default function BackToTop({ props, dataToScreen,isDetail  ,  dataToHome 
   const classes = useStyles();
   const navigate = useNavigate();
 
-  // changing classes to reuse the component 
-  // details and home pages. 
-  const screen = isDetail  ? "containerDetail" : "containerGrid" ;
-
   const onChange = (e) => {
     setSearch(e.target.value);
     dataToHome(e.target.value);
@@ -116,7 +117,6 @@ export default function BackToTop({ props, dataToScreen,isDetail  ,  dataToHome 
           color="inherit"
           onClick={()=> goToHome(navigate) }>
           <Typography 
-          
           variant='h4'>StarWars</Typography>
           </IconButton>
         </Toolbar>
@@ -130,7 +130,7 @@ export default function BackToTop({ props, dataToScreen,isDetail  ,  dataToHome 
       </AppBar>
       <Toolbar id='back-to-top-anchor' />
       <Container>
-        <Box my={2} className={classes[screen]}>
+        <Box>
           {dataToScreen}
         </Box>
       </Container>
